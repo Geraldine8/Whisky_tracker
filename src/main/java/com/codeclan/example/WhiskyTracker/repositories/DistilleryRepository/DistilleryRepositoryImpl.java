@@ -45,7 +45,8 @@ public class DistilleryRepositoryImpl implements DistilleryRepositoryCustom {
 
         try {
             Criteria cr = session.createCriteria(Distillery.class);
-            cr.add(Restrictions.eq("age", age));
+            cr.createAlias("whiskies", "whiskies");
+            cr.add(Restrictions.eq("whiskies.age", age));
 
             foundDistilleries = cr.list();
         } catch(HibernateException ex) {
